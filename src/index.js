@@ -25,7 +25,7 @@ app.on('ready', () => {
     // 2 - Play sound
     exec('afplay /System/Library/Sounds/Glass.aiff', (error, stdout, stderr) => {
       if (error) {
-        console.error(`Ошибка выполнения команды: ${error}`);
+        console.error(`Command error: ${error}`);
         return;
       }
       console.log(`stdout: ${stdout}`);
@@ -34,7 +34,7 @@ app.on('ready', () => {
     // 1 - Password generator
     exec('tea pwgen --secure 16 1', (error, stdout) => {
       if (error) {
-        console.error(`Ошибка выполнения скрипта: ${error}`)
+        console.error(`Script error: ${error}`)
         return
       }
       // 3 - Copy to clipboard
