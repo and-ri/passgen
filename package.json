@@ -1,8 +1,8 @@
 {
   "name": "passgen",
-  "productName": "passgen",
-  "version": "1.0.1",
-  "description": "My Electron application description",
+  "productName": "Passgen",
+  "version": "1.0.2",
+  "description": "Easy one-click password generator",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
@@ -19,7 +19,8 @@
   "license": "MIT",
   "dependencies": {
     "electron-reloader": "^1.2.3",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "fix-path": "^4.0.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.1.1",

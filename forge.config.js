@@ -1,13 +1,21 @@
 module.exports = {
-  packagerConfig: {},
+  packagerConfig: {
+    icon: './assets/MacOS_Icon.icns'
+  },
   rebuildConfig: {},
   makers: [
     {
       name: '@electron-forge/maker-dmg',
       config: {
-        background: './assets/dmg-background.png',
         icon: './assets/MacOS_Icon.icns',
-        format: 'ULFO'
+        background: './assets/DMG_Background.tiff',
+        iconSize: 128,
+        iconSizePadding: 32,
+        format: 'ULFO',
+        window: {
+          size: { width: 544, height: 322 }
+        },
+        overwrite: true
       }
     },
     {

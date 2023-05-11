@@ -1,6 +1,9 @@
 const { app, Tray, nativeImage, nativeTheme, clipboard, BrowserWindow } = require('electron');
 const { exec } = require('child_process');
 const path = require("path");
+import('fix-path').then(({default: fixPath}) => {
+    fixPath();
+});
 
 const run = (command, callback) => {
     exec(command, (error, output) => {
