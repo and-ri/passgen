@@ -1,7 +1,7 @@
 const { app, Tray, nativeImage, nativeTheme } = require('electron');
 const { exec } = require('child_process');
 const path = require("path");
-const clipboard = require('electron-clipboard-extended');
+const clipboard = require('electron');
 
 let tray;
 
