@@ -17,13 +17,8 @@
       ],
       "identity": null,
       "category": "public.app-category.developer-tools",
-      "permissions": [
-        {
-            "clipboard": true,
-            "clipboardRead": true,
-            "clipboardWrite": true
-        }
-      ]
+      "entitlements": "entitlements.plist",
+      "entitlementsInherit": "entitlements.plist"
     },
     "publish": [
       {
