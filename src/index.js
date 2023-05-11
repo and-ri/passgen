@@ -13,7 +13,7 @@ app.on('ready', () => {
   checkLib();
 
   const isDarkTheme = nativeTheme.shouldUseDarkColors;
-  let iconPath = isDarkTheme ? path.join(__dirname, 'icon', "dark-icon.png") : path.join(__dirname, 'icon', "light-icon.png");
+  let iconPath = isDarkTheme ? path.join(__dirname, '../assets/icon', "dark-icon.png") : path.join(__dirname, '../assets/icon', "light-icon.png");
   let icon = nativeImage.createFromPath(iconPath);
   icon = icon.resize({
     height: 16,
