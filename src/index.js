@@ -1,6 +1,7 @@
 const { app, Tray, nativeImage, nativeTheme } = require('electron');
 const { exec } = require('child_process');
 const path = require("path");
+const clipboard = require('electron-clipboard-extended');
 
 let tray;
 
@@ -40,7 +41,6 @@ app.on('ready', () => {
         return
       }
       // 3 - Copy to clipboard
-      const { clipboard } = require('electron')
       clipboard.writeText(stdout.trim());
     });
   });
