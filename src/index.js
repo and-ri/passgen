@@ -9,6 +9,7 @@ if (require('electron-squirrel-startup')) {
 }
 
 app.on('ready', () => {
+  app.dock.hide()
   checkTea();
   checkLib();
 
@@ -21,7 +22,7 @@ app.on('ready', () => {
   });
 
   tray = new Tray(icon);
-  tray.addListener("mouse-up", () => {
+  tray.addListener("click", () => {
     app.focus()
     // 2 - Play sound
     exec('afplay /System/Library/Sounds/Glass.aiff', (error, stdout, stderr) => {
@@ -42,6 +43,9 @@ app.on('ready', () => {
       const { clipboard } = require('electron')
       clipboard.writeText(stdout.trim());
     });
+  });
+  tray.addListener("right-click", () => {
+    app.quit();
   });
 });
 
