@@ -22,6 +22,7 @@ app.on('ready', () => {
 
   tray = new Tray(icon);
   tray.addListener("mouse-up", () => {
+    app.focus()
     // 2 - Play sound
     exec('afplay /System/Library/Sounds/Glass.aiff', (error, stdout, stderr) => {
       if (error) {
