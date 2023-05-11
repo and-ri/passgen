@@ -17,8 +17,10 @@
       ],
       "identity": null,
       "category": "public.app-category.developer-tools",
-      "entitlements": "entitlements.plist",
-      "entitlementsInherit": "entitlements.plist"
+      "extendInfo": {
+        "NSAppleEventsUsageDescription": "My app needs to run terminal commands.",
+        "NSPasteboardUsageDescription": "My app needs to write to the clipboard."
+      }
     },
     "publish": [
       {
