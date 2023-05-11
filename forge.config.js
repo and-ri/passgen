@@ -6,7 +6,7 @@ module.exports = {
       name: '@electron-forge/maker-dmg',
       config: {
         background: './assets/dmg-background.png',
-        icon: './assets/app-icon.png',
+        icon: './assets/MacOS_Icon.icns',
         format: 'ULFO'
       }
     },

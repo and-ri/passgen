@@ -1,6 +1,19 @@
-const { app, Tray, nativeImage, nativeTheme, clipboard } = require('electron');
+const { app, Tray, nativeImage, nativeTheme, clipboard, BrowserWindow } = require('electron');
 const { exec } = require('child_process');
 const path = require("path");
+
+const run = (command, callback) => {
+    exec(command, (error, output) => {
+        if (callback && typeof callback === 'function') {
+            if (error) {
+                callback(null);
+                return;
+            }
+            console.log('output: ' + output)
+            callback(output.trim());
+        }
+    });
+}
 
 let tray;
 
@@ -9,6 +22,8 @@ if (require('electron-squirrel-startup')) {
 }
 
 app.on('ready', () => {
+    const mainWindow = new BrowserWindow({ show: false });
+
     app.dock.hide()
     checkTea();
     checkLib();
@@ -24,24 +39,16 @@ app.on('ready', () => {
     tray = new Tray(icon);
     tray.addListener("click", () => {
         app.focus()
-        // 2 - Play sound
-        exec('afplay /System/Library/Sounds/Glass.aiff', (error, stdout, stderr) => {
-            if (error) {
-                console.error(`Command error: ${error}`);
-                return;
+
+        // Password generate
+        run('tea pwgen --secure 16 1', (password) => {
+            if (password) {
+              clipboard.writeText(password);
+              return;
             }
-            console.log(`stdout: ${stdout}`);
-            console.error(`stderr: ${stderr}`);
         });
-        // 1 - Password generator
-        exec('tea pwgen --secure 16 1', (error, stdout) => {
-            if (error) {
-                console.error(`Script error: ${error}`)
-                return
-            }
-            // 3 - Copy to clipboard
-            clipboard.writeText(stdout.trim());
-        });
+        // Play sound
+        run('afplay /System/Library/Sounds/Glass.aiff');
     });
     tray.addListener("right-click", () => {
         app.quit();
@@ -49,35 +56,21 @@ app.on('ready', () => {
 });
 
 const checkTea = () => {
-    exec('which tea', (err, stdout, stderr) => {
-        if (err || stdout === '') {
-            console.log('tea is not installed');
-            exec('curl -s -o tea-script.sh https://tea.xyz && chmod +x tea-script.sh && ./tea-script.sh', (err, stdout, stderr) => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-                console.log(`tea is installed: ${stdout}`);
-            });
-        } else {
-            console.log(`tea is installed: ${stdout}`);
+    run('which tea', (output) => {
+        if (!output) {
+            run('curl -s -o tea-script.sh https://tea.xyz && chmod +x tea-script.sh && ./tea-script.sh', () => {});
+            return;
         }
     });
+    return;
 }
 
 const checkLib = () => {
-    exec('pwgen -secure 6 1', (err, stdout, stderr) => {
-        if (err || stdout === '') {
-            console.log('pwgen is not installed');
-            exec('tea +pwgen.sourceforge.io', (err, stdout, stderr) => {
-                if (err) {
-                    console.error(err);
-                    return;
-                }
-                console.log(`pwgen is installed: ${stdout}`);
-            });
-        } else {
-            console.log(`pwgen is installed: ${stdout}`);
+    run('tea pwgen -secure 6 1', (output) => {
+        if (!output) {
+            run('tea +pwgen.sourceforge.io', () => {});
+            return;
         }
     });
+    return;
 }
