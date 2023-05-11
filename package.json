@@ -1,0 +1,86 @@
+{
+  "name": "passgen",
+  "productName": "Passgen",
+  "version": "1.0.1",
+  "description": "Easy password generator",
+  "main": "src/index.js",
+  "build": {
+    "appId": "com.passgen.app",
+    "icon": "assets/MacOS_Icon.icns",
+    "directories": {
+      "output": "build"
+    },
+    "productName": "Passgen",
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "identity": null,
+      "category": "public.app-category.developer-tools",
+      "permissions": [
+        {
+            "clipboard": true,
+            "clipboardRead": true,
+            "clipboardWrite": true
+        }
+      ]
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "host": "github.com",
+        "owner": "ArionThinker",
+        "repo": "passgen"
+      }
+    ],
+    "dmg": {
+      "background": "assets/DMG_Background.tiff",
+      "icon": "assets/MacOS_Icon.icns",
+      "iconSize": 75,
+      "window": {
+        "width": 544,
+        "height": 408
+      },
+      "contents": [
+        {
+          "x": 450,
+          "y": 280
+        },
+        {
+          "x": 450,
+          "y": 170,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "dir": "electron-builder --dir",
+    "dist": "electron-builder",
+    "lint": "echo \"No linting configured\""
+  },
+  "keywords": [],
+  "author": {
+    "name": "Andrii Riabchenko",
+    "email": "ryabchenko.andrew@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.1.1",
+    "@electron-forge/maker-deb": "^6.1.1",
+    "@electron-forge/maker-rpm": "^6.1.1",
+    "@electron-forge/maker-squirrel": "^6.1.1",
+    "@electron-forge/maker-zip": "^6.1.1",
+    "@electron-forge/publisher-github": "^6.1.1",
+    "electron": "24.3.0",
+    "electron-builder": "^23.6.0"
+  }
+}
